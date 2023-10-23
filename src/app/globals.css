@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwindcss component {
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -104,4 +109,5 @@ a {
   html {
     color-scheme: dark;
   }
+}
 }
