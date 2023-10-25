@@ -21,15 +21,15 @@ import Preloader from "@/components/globals/preloader/Preloader";
 import { FiZap, FiEye, FiEyeOff } from "react-icons/fi";
 
 // hooks
-// import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-// import { AUTH_USER } from "@/redux/reducers/userReducer";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { AUTH_USER } from "@/redux/reducers/userReducer";
 
 export const Login: FC = () => {
 	const navigation = useRouter();
 	const passwdRef = useRef<HTMLInputElement | null>(null);
 
-	// const dispatch = useAppDispatch();
-	// const userStore = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
+	const userStore = useAppSelector((state) => state.user);
 
 	const [user, setUser] = useState<any | null>(null);
 
@@ -63,21 +63,20 @@ export const Login: FC = () => {
 				email,
 				password,
 			};
-			console.log(userData);
 
-			// try {
-			// 	const userCredential = await signIn(
-			// 		userData.email,
-			// 		userData.password
-			// 	);
-			// 	// console.log("Logged in user:", userCredential);
-			// 	dispatch(AUTH_USER(userCredential));
-			// 	navigation.push("/dashboard");
-			// } catch (error) {
-			// 	setError("Invalid login credentials");
-			// 	setLoading(false);
-			// 	console.error("Login error:", error);
-			// }
+			try {
+				const userCredential = await signIn(
+					userData.email,
+					userData.password
+				);
+				console.log("Logged in user:", userCredential);
+				dispatch(AUTH_USER(userCredential));
+				navigation.push("/dashboard");
+			} catch (error) {
+				setError("Invalid login credentials");
+				setLoading(false);
+				console.error("Login error:", error);
+			}
 		} else setLoading(false);
 	};
 
@@ -107,18 +106,11 @@ export const Login: FC = () => {
 		);
 	};
 
-	// useEffect(() => {
-	// 	// Check the user's authentication state when the component mounts.
-	// 	session().then((user) => {
-	// 		setUser(user);
-	// 	});
-	// }, []);
-
-	// if (userStore && userStore?.isLoggedIn) {
-	// 	navigation.push("/dashboard"); // Redirect to the dashboard if the user is logged in.
-	// 	// show a loading spinner suspense while checking session
-	// 	return <Preloader />;
-	// }
+	if (userStore && userStore?.isLoggedIn) {
+		navigation.push("/dashboard"); // Redirect to the dashboard if the user is logged in.
+		// show a loading spinner suspense while checking session
+		return <Preloader />;
+	}
 
 	return (
 		<div className="bg-[#E85328]/10 h-auto md:h-screen w-full flex flex-col-reverse md:flex-row items-center justify-center">
@@ -139,8 +131,8 @@ export const Login: FC = () => {
 						className="h-full w-full object-contain"
 					/>
 				</div>
-				<div className="h-auto w-7/12 md:w-full flex items-center justify-center mx-auto">
-					<p className="text-sm leading-snug text-[#B04526] font-medium w-auto">
+				<div className="h-auto w-9/12 md:w-full flex items-center justify-center mx-auto">
+					<p className="text-sm leading-snug text-[#B04526] font-medium w-auto text-center">
 						&quot;ContractNix - where contracts are a breeze, and
 						projects thrive.&quot;
 					</p>
@@ -172,19 +164,6 @@ export const Login: FC = () => {
 						onSubmit={handleSubmit}
 						className="h-auto w-9/12 my-3 flex flex-col items-center justify-center space-y-10"
 					>
-						{/* name */}
-						<div className="h-auto w-full flex flex-col items-start justify-center space-y-2 position relative">
-							<label className="text-sm text-gray-800 font-normal">
-								Fullname
-							</label>
-							<input
-								value=""
-								onChange={() => {}}
-								type="text"
-								placeholder=""
-								className="h-7 w-full border-b border-gray-400 focus:outline-none text-sm text-gray-500 pb-3"
-							/>
-						</div>
 						{/* email */}
 						<div className="h-auto w-full flex flex-col items-start justify-center space-y-2 position relative">
 							<label className="text-sm text-gray-800 font-normal">
@@ -195,7 +174,7 @@ export const Login: FC = () => {
 								onChange={handleEmail}
 								type="text"
 								placeholder=""
-								className="h-7 w-full border-b border-gray-400 focus:outline-none text-sm text-gray-500 pb-3"
+								className="h-7 w-full border-b border-gray-400 focus:outline-none text-sm text-gray-500 py-2 flex items-center justify-start"
 							/>
 						</div>
 						{/* password */}
@@ -209,7 +188,7 @@ export const Login: FC = () => {
 								onChange={handlePassword}
 								type={passwdType}
 								placeholder=""
-								className="h-7 w-full border-b border-gray-400 focus:outline-none text-sm text-gray-500 pb-3"
+								className="h-7 w-full border-b border-gray-400 focus:outline-none text-sm text-gray-500 py-2 flex items-center justify-start"
 							/>
 							<div
 								className="position absolute right-0 top-5 cursor-pointer"
@@ -220,6 +199,15 @@ export const Login: FC = () => {
 								) : (
 									<FiEye className="text-md text-gray-700" />
 								)}
+							</div>
+							{/* forgot password */}
+							<div className="h-auto w-full flex items-start justify-end position relative">
+								<Link
+									href="/auth/resetpassword"
+									className="text-xs text-[#867F7F] font-medium cursor-pointer"
+								>
+									Forgot password?
+								</Link>
 							</div>
 						</div>
 						<button className="h-10 w-full rounded-full flex items-center justify-center font-medium text-sm bg-[#E85328] text-white select-none">

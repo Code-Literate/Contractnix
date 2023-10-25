@@ -1,10 +1,10 @@
 // components
-import Login from "@/components/views/auth/login/Login";
+import Home from "@/components/views/home/Home";
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<main className="h-auto w-full">
-			<Login />
+			<Home />
 		</main>
 	);
 }

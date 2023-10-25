@@ -41,13 +41,13 @@ import {
 } from "firebase/storage";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyDe6VAu1D4628ELKwkrMDQjBuccb5rHSa0",
-	authDomain: "myaza-86fb8.firebaseapp.com",
-	projectId: "myaza-86fb8",
-	storageBucket: "myaza-86fb8.appspot.com",
-	messagingSenderId: "335453666171",
-	appId: "1:335453666171:web:55a9196555319a3fc05bde",
-	measurementId: "G-M4PTH480EP",
+	apiKey: "AIzaSyB0onU23zfK463wVfdUOxi_UENybHDDHH0",
+	authDomain: "contractnix.firebaseapp.com",
+	projectId: "contractnix",
+	storageBucket: "contractnix.appspot.com",
+	messagingSenderId: "193732234248",
+	appId: "1:193732234248:web:47f8e8f7722651435195bd",
+	measurementId: "G-L51J54FMD7",
 };
 
 // Initialize Firebase
@@ -369,7 +369,7 @@ const deleteUserAccountAndData = async (
 		await reauthenticateWithCredential(user as any, credential as any);
 
 		// delete the user storage assets and resources
-		await deleteAvatarFolder(`avatars/${userId}`)
+		await deleteAvatarFolder(`avatars/${userId}`);
 
 		// first delete all user accounts documents in 'accounts' collection
 		let userAccounts = await getUserAccounts(userId);
