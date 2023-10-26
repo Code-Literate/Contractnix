@@ -503,7 +503,7 @@ const Home = () => {
 					</div>
 				</div>
 
-				<div className="h-12 w-full border-t border-gray-200 pt-10 flex flex-col space-y-7 md:space-y-0 md:flex-row md:items-center items-start justify-between">
+				<div className="h-12 w-full border-t border-gray-200 py-10 flex flex-col space-y-7 md:space-y-0 md:flex-row md:items-center items-start justify-between">
 					<p className="text-md md:text-xs text-gray-500 w-11/12 font-normal pr-4">
 						© ContractNix | All Rights Reserved
 					</p>
