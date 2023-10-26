@@ -100,7 +100,7 @@ const Freelancers = () => {
 			}}
 			loop={true}
 			speed={5000}
-			spaceBetween={10}
+			spaceBetween={30}
 			slidesPerView={5}
 			centeredSlides={false}
 			effect={"slide"}
